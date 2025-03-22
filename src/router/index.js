@@ -1,14 +1,16 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
-import Login from '../views/login.vue'
-import Register from '../views/registro.vue'
-import DashboardLayout from '../components/dashboardLayout.vue'
-import Inventario from '../views/inventario.vue'
-import Administracion from '../views/administracion.vue'
-import Menu from '../views/menu.vue'
-import Peso from '../views/peso.vue'
-import Estadistica from '../views/estadistica.vue'
-import ForgotPassword from '../views/forgotPassword.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import Home from '../views/Home.vue';
+import Login from '../views/login.vue';
+import Register from '../views/registro.vue';
+import DashboardLayout from '../components/dashboardLayout.vue';
+import Inventario from '../views/inventario.vue';
+import Administracion from '../views/administracion.vue';
+import Menu from '../views/menu.vue';
+import Peso from '../views/peso.vue';
+import Estadistica from '../views/estadistica.vue';
+import ForgotPassword from '../views/forgotPassword.vue';
+import User from '../views/user.vue';
+import objectWeigth from '@/views/objectWeight.vue';
 
 const routes = [
   { path: '/', name: 'Home', component: Home },
@@ -21,7 +23,10 @@ const routes = [
       { path: 'menu', name: 'Menu', component: Menu },
       { path: 'peso', name: 'Peso', component: Peso },
       { path: 'estadistica', name: 'Estadistica', component: Estadistica },
-      { path: 'administracion', name: 'Administracion', component: Administracion }
+      { path: 'administracion', name: 'Administracion', component: Administracion },
+      { path: 'user', name: 'User', component: User },
+      { path: 'object-weight', name: 'ObjectWeight', component: objectWeigth }
+
     ]
   }
 ];

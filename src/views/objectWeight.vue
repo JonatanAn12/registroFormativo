@@ -1,9 +1,5 @@
 <template>
-  <div class="peso">
-    <h1>Zona de Pesaje</h1>
-    <button @click="obtenerPeso">Obtener Peso</button>
-    <h2 v-if="peso">Peso detectado: {{ peso }} kg</h2>
-
+  <div class="object-weight">
     <h1>Reconocimiento de Texto en Imagen</h1>
     <input type="file" accept="image/*" @change="handleImageUpload" />
     <button @click="procesarImagen">Procesar Imagen</button>
@@ -12,25 +8,14 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
   data() {
     return {
-      peso: null,
       imagen: null,
       textoReconocido: ''
     };
   },
   methods: {
-    async obtenerPeso() {
-      try {
-        const response = await axios.get('http://localhost:8080/api/peso');
-        this.peso = response.data.peso;
-      } catch (error) {
-        console.error('Error obteniendo el peso:', error);
-      }
-    },
     handleImageUpload(event) {
       const file = event.target.files[0] || null;
       this.imagen = file;
@@ -42,30 +27,33 @@ export default {
       }
 
       const formData = new FormData();
-      formData.append('image', this.imagen);
+      formData.append('imagen', this.imagen);
 
       try {
-        const response = await axios.post('http://localhost:8080/api/ocr/extract-text', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
+        const response = await fetch('http://localhost:8080/api/imagen', {
+          method: 'POST',
+          body: formData
         });
-        this.textoReconocido = response.data.text;
+        const data = await response.json();
+        this.textoReconocido = data.texto;
       } catch (error) {
         console.error('Error procesando la imagen:', error);
-        alert('Error procesando la imagen.');
       }
     }
   }
-};
+}
 </script>
 
 <style scoped>
-.peso {
+.object-weight {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 2rem;
+}
+
+input[type="file"] {
+  margin-bottom: 1rem;
 }
 
 button {
@@ -76,15 +64,10 @@ button {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s;
-  margin-top: 1rem;
 }
 
 button:hover {
   background-color: #1c86ee;
-}
-
-input[type="file"] {
-  margin-bottom: 1rem;
 }
 
 h2 {

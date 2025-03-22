@@ -2,7 +2,7 @@
   <div :class="['dashboard-layout', { 'dark-mode': isDarkMode }]">
     <div class="sidebar" :class="{ open: isOpen }">
       <div class="logo-details">
-        <div class="logo_name">SYSTEM POS</div>
+        <div class="logo_name">SmartPay</div>
         <i class='bx' :class="isOpen ? 'bx-menu-alt-right bx-md' : 'bx-menu bx-md'" id="btn" @click="toggleSidebar"></i>
       </div>
       <ul class="nav-list">
@@ -60,7 +60,11 @@
         <div class="profile-details">
           <img src="../assets/img/morichal.png" alt="profileImg">
           <div class="name_job">
+            <li>
+              <router-link to="/dashboard/user">
             <button class="name"><i class='bx bx-user bx-md' ></i></button>
+              </router-link>
+          </li>
             <div class="job"></div>
           </div>
         </div>
@@ -84,6 +88,7 @@
 export default {
   data() {
     return {
+      isDarkMode: false,
       isOpen: false
     };
   },

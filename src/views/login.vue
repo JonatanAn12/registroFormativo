@@ -1,22 +1,22 @@
 <template>
   <div class="background">
-  <div class="login">
-    <h1>Login</h1>
-    <form @submit.prevent="login">
-      <div>
-        <label for="email">Email:</label>
-        <input type="email" v-model="email" required />
-      </div>
-      <div>
-        <label for="password">Password:</label>
-        <input type="password" v-model="password" required />
-      </div>
-      <button type="submit">Login</button>
-    </form>
-    <p>¿No tienes una cuenta? <router-link to="/register">Regístrate aquí</router-link></p>
-    <p><router-link to="/forgot-password">¿Olvidaste tu contraseña?</router-link></p>
+    <div class="login">
+      <h1>SmartPay</h1>
+      <form @submit.prevent="login">
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input type="email" v-model="email" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input type="password" v-model="password" required />
+        </div>
+        <button type="submit">Login</button>
+      </form>
+      <p>¿No tienes una cuenta? <router-link to="/register">Regístrate aquí</router-link></p>
+      <p><router-link to="/forgot-password">¿Olvidaste tu contraseña?</router-link></p>
+    </div>
   </div>
-</div>
 </template>
 
 <script>
@@ -44,29 +44,72 @@ export default {
 </script>
 
 <style scoped>
+.background {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f8ff; /* Fondo azul claro */
+  width: 100vw;
+}
+
 .login {
-  max-width: 600px;
-  margin: auto;
-  padding: 2em;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco semitransparente */
-  backdrop-filter: blur(10px); /* Aplica el efecto difuminado */
+  background-color: #ffffff; /* Fondo blanco */
+  padding: 4rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  width: 400px;
+  margin-left: 12rem;
 }
 
-input, button {
-  border-radius: 4px;
-  border: unset;  /*para que no se vean los bordes*/
-  padding: 15px 30px;
-  font-size: larger;
-  margin-bottom: 1em;
-  width: 100%;
+h1 {
+  color: #1e90ff; /* Azul */
+  margin-bottom: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+label {
   display: block;
-  font-weight: bold; /* Aumenta el grosor de las letras de los inputs y botones */
+  margin-bottom: 0.5rem;
+  color: #1e90ff; /* Azul */
 }
 
-h1, label {
-  font-weight: bold; /* Aumenta el grosor de las letras del título */
-  color: rgb(0, 0, 0);
+input {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #1e90ff; /* Azul */
+  border-radius: 4px;
+}
+
+button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #1e90ff; /* Azul */
+  color: #ffffff; /* Blanco */
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #1c86ee; /* Azul más oscuro */
+}
+
+p {
+  margin-top: 1rem;
+  color: #1e90ff; /* Azul */
+}
+
+a {
+  color: #1e90ff; /* Azul */
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 </style>

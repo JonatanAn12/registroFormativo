@@ -38,15 +38,4 @@ a,
     grid-template-columns: 1fr 1fr;
     padding: 0 2rem;
   }
-
-  .background {
-    background-image: url('@/assets/img/morichal.png');
-    background-size: cover;
-    background-position: center;
-    height: 100vh;
-    width: 100vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
 }
