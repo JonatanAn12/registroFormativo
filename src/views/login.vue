@@ -1,7 +1,7 @@
 <template>
   <div class="background">
     <div class="login">
-      <h1>SmartPay</h1>
+      <h1>Ventryx</h1>
       <form @submit.prevent="login">
         <div class="form-group">
           <label for="email">Email:</label>
