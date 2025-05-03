@@ -15,4 +15,4 @@
   .inventario {
     /* Estilos para el perfil */
   }
-  </style>
+  </style>  

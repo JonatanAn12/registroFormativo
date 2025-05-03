@@ -19,21 +19,54 @@ export default {
     return {
       peso: null,
       imagen: null,
-      textoReconocido: ''
+      textoReconocido: '' // Aquí se almacena el texto extraído de la imagen
     };
   },
   methods: {
     async obtenerPeso() {
+      if (!this.textoReconocido || this.textoReconocido.trim() === '') {
+        alert('Por favor, procesa una imagen antes de obtener el peso.');
+        return;
+      }
+
       try {
-        const response = await axios.get('http://localhost:8080/api/peso');
-        this.peso = response.data.peso;
+        // Enviar el texto extraído como parámetro de consulta
+        const response = await axios.post('http://localhost:8080/api/peso', null, {
+          params: {
+            texto: this.textoReconocido // Enviar el texto como parámetro de consulta
+          }
+        });
+        this.peso = response.data.peso; // Recibir el peso desde el backend
+        alert('Peso obtenido correctamente: ' + this.peso + ' kg');
       } catch (error) {
         console.error('Error obteniendo el peso:', error);
+        alert('Ocurrió un error al obtener el peso. Por favor, intenta nuevamente.');
       }
     },
     handleImageUpload(event) {
       const file = event.target.files[0] || null;
-      this.imagen = file;
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const img = new Image();
+          img.src = e.target.result;
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+
+            // Ajustar la resolución (por ejemplo, 1024x1024)
+            canvas.width = 1024;
+            canvas.height = 1024;
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+            // Convertir la imagen procesada a un archivo Blob
+            canvas.toBlob((blob) => {
+              this.imagen = new File([blob], file.name, { type: file.type });
+            }, file.type);
+          };
+        };
+        reader.readAsDataURL(file);
+      }
     },
     async procesarImagen() {
       if (!this.imagen) {
@@ -50,10 +83,11 @@ export default {
             'Content-Type': 'multipart/form-data'
           }
         });
-        this.textoReconocido = response.data.text;
+        this.textoReconocido = response.data.text; // Guardar el texto extraído
+        alert('Texto procesado correctamente: ' + this.textoReconocido);
       } catch (error) {
         console.error('Error procesando la imagen:', error);
-        alert('Error procesando la imagen.');
+        alert('Ocurrió un error al procesar la imagen. Por favor, intenta nuevamente.');
       }
     }
   }

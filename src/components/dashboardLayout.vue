@@ -2,7 +2,7 @@
   <div :class="['dashboard-layout', { 'dark-mode': isDarkMode }]">
     <div class="sidebar" :class="{ open: isOpen }">
       <div class="logo-details">
-        <div class="logo_name">SmartPay</div>
+        <div class="logo_name">Ventryx</div>
         <i class='bx' :class="isOpen ? 'bx-menu-alt-right bx-md' : 'bx-menu bx-md'" id="btn" @click="toggleSidebar"></i>
       </div>
       <ul class="nav-list">
